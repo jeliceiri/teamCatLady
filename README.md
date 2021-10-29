@@ -30,5 +30,7 @@ JUnit 5 with 80%+ code coverage
 
 ## Team Docs, Time Log, and Design Docs
 Links to Team Resume, Charter, Project Plan
+
 Link to time log/journal/blog/wiki entries documenting progress, obstacles, findings, learning points
+
 Link to design docs
