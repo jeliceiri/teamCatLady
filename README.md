@@ -15,7 +15,7 @@ The service provides the following:
 * Update a president, given a president id
 * TODO: finish this section
 
-##The service uses the following technologies:
+## The service uses the following technologies:
 JAX-RS API with Jersey.
 
 TODO add all of your tech here....
