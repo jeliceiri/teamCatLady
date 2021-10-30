@@ -27,10 +27,10 @@ TODO add all of your tech here....
 |---|---|---|
 | id   | unique identifier  | number  |
 | name  | President name, for example: "George Washington"  | string  |
-| birthyear  | President birth year, for example: "1942"  | string  |
-| deathyear  | President death year, for example: "1919"  | string  |
-| tookoffice  | Date president took office, for example: "1909-03-04"  | string  |
-| leftoffice  | Date president left office, for example: "1913-03-04"  | string  |
+| birthYear  | President birth year, for example: "1942"  | string  |
+| deathYear  | President death year, for example: "1919"  | string  |
+| tookOffice  | Date president took office, for example: "1909-03-04"  | string  |
+| leftOffice  | Date president left office, for example: "1913-03-04"  | string  |
 | party  | President party, for example: "Democratic", "Federalist", "Republican", "Whig", or "No Party"  | string  |
 
 
