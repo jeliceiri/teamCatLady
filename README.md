@@ -18,7 +18,7 @@ The service provides the following:
 ##The service uses the following technologies:
 JAX-RS API with Jersey.
 
-TODO add all of your tech here...
+TODO add all of your tech here....
 
 ## Resources
 **Presidents**
