@@ -36,7 +36,9 @@ TODO add all of your tech here....
 
 
 ## Team Docs, Time Log, and Design Docs
-Links to Team Resume, Charter, Project Plan
+* [Team Resume](docs/TeamResume.md)
+* [Team Charter](docs/TeamCharter.md)
+
 
 Link to time log/journal/blog/wiki entries documenting progress, obstacles, findings, learning points
 
