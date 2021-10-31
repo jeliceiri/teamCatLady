@@ -31,8 +31,8 @@ The service supports the following formats:
 |---|---|---|
 | id   | unique identifier  | number  |
 | name  | President name, for example: "George Washington"  | string  |
-| birthYear  | President birth year, for example: "1942"  | string  |
-| deathYear  | President death year, for example: "1919"  | string  |
+| birthYear  | President birth year, for example: "1942"  | int  |
+| deathYear  | President death year, for example: "1919"  | int  |
 | tookOffice  | Date president took office, for example: "1909-03-04"  | string  |
 | leftOffice  | Date president left office, for example: "1913-03-04"  | string  |
 | party  | President party, for example: "Democratic", "Federalist", "Republican", "Whig", or "No Party"  | string  |
