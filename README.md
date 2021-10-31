@@ -13,7 +13,7 @@ The service provides the following:
 * Get a list of presidents in plain text and json who are deceased
 * Add a president
 * Update a president, given a president id
-* TODO: finish this section
+
 
 ## The service uses the following technologies:
 JAX-RS API with Jersey.
@@ -33,6 +33,16 @@ TODO add all of your tech here....
 | leftOffice  | Date president left office, for example: "1913-03-04"  | string  |
 | party  | President party, for example: "Democratic", "Federalist", "Republican", "Whig", or "No Party"  | string  |
 
+## Service Calls
+GET /presidents/json
+GET /presidents/plain
+GET /president/json/:id
+GET /president/plain/:id
+GET /presidents/json/:party
+GET /presidents/plain/:party
+GET /presidents/json/:living
+GET /presidents/plain/:deceased
+PUT /president/:id
 
 
 ## Team Docs, Time Log, and Design Docs
