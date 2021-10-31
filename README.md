@@ -34,15 +34,15 @@ TODO add all of your tech here....
 | party  | President party, for example: "Democratic", "Federalist", "Republican", "Whig", or "No Party"  | string  |
 
 ## Service Calls
-GET /presidents/json
-GET /presidents/plain
-GET /president/json/:id
-GET /president/plain/:id
-GET /presidents/json/:party
-GET /presidents/plain/:party
-GET /presidents/json/:living
-GET /presidents/plain/:deceased
-PUT /president/:id
+GET /presidents/json  
+GET /presidents/plain  
+GET /president/json/:id  
+GET /president/plain/:id  
+GET /presidents/json/:party  
+GET /presidents/plain/:party  
+GET /presidents/json/:living  
+GET /presidents/plain/:deceased  
+PUT /president/:id  
 
 
 ## Team Docs, Time Log, and Design Docs
