@@ -6,19 +6,23 @@ An important piece of our country's history are the individuals who have served 
 
 The service provides the following:
 
-* Get a president in plain text and json, given a president id
-* Get all presidents in plain text and json
-* Get a list of presidents in plain text and json given a party
-* Get a list of presidents in plain text and json who are living
-* Get a list of presidents in plain text and json who are deceased
+* Get a president given a president id
+* Get all presidents 
+* Get a list of presidents given a party
+* Get a list of presidents who are living
+* Get a list of presidents who are deceased
 * Add a president
 * Update a president, given a president id
 
+The service supports the following formats: 
+
+* Plain text
+* JSON
+* XML
 
 ## The service uses the following technologies:
-JAX-RS API with Jersey.
-
-TODO add all of your tech here....
+* JAX-RS API with Jersey.
+* Swagger for API Documentation
 
 ## Resources
 **Presidents**
@@ -34,16 +38,13 @@ TODO add all of your tech here....
 | party  | President party, for example: "Democratic", "Federalist", "Republican", "Whig", or "No Party"  | string  |
 
 ## Service Calls
-GET /presidents/json  
-GET /presidents/plain  
-GET /president/json/:id  
-GET /president/plain/:id  
-GET /presidents/json/:party  
-GET /presidents/plain/:party  
-GET /presidents/json/:living  
-GET /presidents/plain/:deceased  
-PUT /president/:id  
 
+* GET /presidents/
+* GET /presidents/:responseType
+* GET /presidents/id/:id/:responseType
+* GET /presidents/party/:party/:responseType
+* GET /presidents/living/:aliveOrDeadBoolean/:responseType
+* PUT /president/id/:id
 
 ## Team Docs, Time Log, and Design Docs
 * [Team Resume](docs/TeamResume.md)
