@@ -50,8 +50,6 @@ The service supports the following formats:
 * [Team Resume](docs/TeamResume.md)
 * [Team Charter](docs/TeamCharter.md)
 * [Project Plan](docs/ProjectPlan.md)
-
-
-Link to time log/journal/blog/wiki entries documenting progress, obstacles, findings, learning points
+* [Time Log](docs/TimeLog.md)
 
 Link to design docs
