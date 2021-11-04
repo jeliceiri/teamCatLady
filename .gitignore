@@ -8,3 +8,7 @@
 /httpRequests/
 
 .idea/*
+
+# Devs should copy the example file in main/resources and edit the filepaths
+# to match their system
+src/main/resources/log4j2.properties
