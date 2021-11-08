@@ -228,11 +228,11 @@ public class President {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         President president = (President) o;
-        return number == president.number && birthYear == president.birthYear && deathYear == president.deathYear && Objects.equals(name, president.name) && Objects.equals(tookOffice, president.tookOffice) && Objects.equals(leftOffice, president.leftOffice) && Objects.equals(party, president.party);
+        return id == president.id && number == president.number && birthYear == president.birthYear && name.equals(president.name) && Objects.equals(deathYear, president.deathYear) && tookOffice.equals(president.tookOffice) && Objects.equals(leftOffice, president.leftOffice) && party.equals(president.party);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, name, birthYear, deathYear, tookOffice, leftOffice, party);
+        return Objects.hash(id, number, name, birthYear, deathYear, tookOffice, leftOffice, party);
     }
 }
