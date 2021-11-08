@@ -40,10 +40,10 @@ public class PresidentAPI {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     @GET
-    // TODO what should the default return type be? JSON?
+    @Produces("application/json")
     public Response getAllPresidents() {
-        List<President> allPresidents = new ArrayList<>();
-        String responseJSON = ""; // TODO
+        List<President> allPresidents = dao.getAll();
+        String responseJSON = "";
 
         try {
             responseJSON = objectMapper.writeValueAsString(allPresidents);
@@ -56,15 +56,24 @@ public class PresidentAPI {
 
     // TODO /presidents/:responseType
 
-    // TODO /presidents/id/:id/:responseType
-    @GET
-    @Path("{id}/{responseType}")
-    @Produces("application/json")
-    public Response getPresidentByID(int id, String responseType) {
+    // TODO /presidents/id/:id/
+//    @GET
+//    @Path("{id}/")
+//    @Produces("application/json")
+//    public Response getPresidentByID(int id) {
+//
+//    }
 
-    }
+    // TODO /presidents/id/:id/:responseType
+//    @GET
+//    @Path("{id}/{responseType}")
+//    @Produces("application/json")
+//    public Response getPresidentByID(int id, String responseType) {
+//
+//    }
 
     // TODO /presidents/party/:party/:responseType
+
 
     // TODO /presidents/living/:aliveOrDeadBool/:responseType
 
