@@ -4,6 +4,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamcatlady.entity.President;
@@ -41,7 +43,7 @@ public class PresidentAPI {
     // TODO what should the default return type be? JSON?
     public Response getAllPresidents() {
         List<President> allPresidents = new ArrayList<>();
-        String responseJSON = "";
+        String responseJSON = ""; // TODO
 
         try {
             responseJSON = objectMapper.writeValueAsString(allPresidents);
@@ -51,5 +53,21 @@ public class PresidentAPI {
 
         return Response.status(200).entity(responseJSON).build();
     }
+
+    // TODO /presidents/:responseType
+
+    // TODO /presidents/id/:id/:responseType
+    @GET
+    @Path("{id}/{responseType}")
+    @Produces("application/json")
+    public Response getPresidentByID(int id, String responseType) {
+
+    }
+
+    // TODO /presidents/party/:party/:responseType
+
+    // TODO /presidents/living/:aliveOrDeadBool/:responseType
+
+    // TODO PUT /president/id/:id
 
 }
