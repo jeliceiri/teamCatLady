@@ -19,6 +19,9 @@ public class President {
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
 
+    @Column(name = "number")
+    private int number;
+
     @Column(name = "president")
     private String name;
 
@@ -26,7 +29,7 @@ public class President {
     private int birthYear;
 
     @Column(name = "death_year")
-    private int deathYear;
+    private Integer deathYear;
 
     @Column(name = "took_office")
     private String tookOffice;
@@ -45,6 +48,7 @@ public class President {
     /**
      * Instantiates a new President.
      *
+     * @param number    the president's number
      * @param name       the name
      * @param birthYear  the birth year
      * @param deathYear  the death year
@@ -52,7 +56,8 @@ public class President {
      * @param leftOffice the left office
      * @param party      the party
      */
-    public President(String name, int birthYear, int deathYear, String tookOffice, String leftOffice, String party) {
+    public President(int number, String name, int birthYear, Integer deathYear, String tookOffice, String leftOffice, String party) {
+        this.number = number;
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
@@ -77,6 +82,24 @@ public class President {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * Gets number.
+     *
+     * @return the number
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * Sets number.
+     *
+     * @param number the number
+     */
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     /**
@@ -129,7 +152,7 @@ public class President {
      *
      * @param deathYear the death year
      */
-    public void setDeathYear(int deathYear) {
+    public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
     }
 
@@ -190,7 +213,7 @@ public class President {
     @Override
     public String toString() {
         return "President{" +
-                "id=" + id +
+                "number=" + number +
                 ", name='" + name + '\'' +
                 ", birthYear=" + birthYear +
                 ", deathYear=" + deathYear +
@@ -205,11 +228,11 @@ public class President {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         President president = (President) o;
-        return id == president.id && birthYear == president.birthYear && deathYear == president.deathYear && Objects.equals(name, president.name) && Objects.equals(tookOffice, president.tookOffice) && Objects.equals(leftOffice, president.leftOffice) && Objects.equals(party, president.party);
+        return number == president.number && birthYear == president.birthYear && deathYear == president.deathYear && Objects.equals(name, president.name) && Objects.equals(tookOffice, president.tookOffice) && Objects.equals(leftOffice, president.leftOffice) && Objects.equals(party, president.party);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, birthYear, deathYear, tookOffice, leftOffice, party);
+        return Objects.hash(number, name, birthYear, deathYear, tookOffice, leftOffice, party);
     }
 }

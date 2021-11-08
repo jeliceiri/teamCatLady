@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `presidents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `presidents` (
+                              `id` int NOT NULL AUTO_INCREMENT,
                               `number` int NOT NULL,
                               `president` varchar(22) NOT NULL,
                               `birth_year` int NOT NULL,
@@ -30,7 +31,8 @@ CREATE TABLE `presidents` (
                               `took_office` varchar(10) NOT NULL,
                               `left_office` varchar(10) DEFAULT NULL,
                               `party` varchar(21) NOT NULL,
-                              PRIMARY KEY (`number`)
+                              PRIMARY KEY (`id`)
+                              UNIQUE KEY `number` (`number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
