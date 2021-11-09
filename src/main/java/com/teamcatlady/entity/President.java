@@ -143,7 +143,7 @@ public class President {
      *
      * @return the death year
      */
-    public int getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
