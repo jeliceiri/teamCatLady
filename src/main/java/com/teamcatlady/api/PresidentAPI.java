@@ -118,6 +118,33 @@ public class PresidentAPI {
     }
 
     /**
+     * Helper method for all API endpoints that returns an individual president in plaintext, as a string.
+     * While this might be a bit redundant, I added this for hypothetical future-proofing, in case we did
+     * want to change how the API formats its plaintext response.
+     *
+     * @param president a single president returned by the dao
+     * @return a string of plaintext representing that president
+     */
+    public String plaintextFormatHelper(President president) {
+        String responseString = president.toString();
+        return responseString;
+    }
+
+    /**
+     * Helper method for all API endpoints that returns a list of presidents in plaintext, as a string.
+     * While this might be a bit redundant, I added this for hypothetical future-proofing, in case we did
+     * want to change how the API formats its plaintext response. Having a second method is required for
+     * polymorphism, but also hypothetically you might want to format a list of presidents differently.
+     *
+     * @param listOfPresidents a list of presidents returned by the dao
+     * @return a string of plaintext representing that list of presidents
+     */
+    public String plaintextFormatHelper(List<President> listOfPresidents) {
+        String responseString = listOfPresidents.toString();
+        return responseString;
+    }
+
+    /**
      * This endpoint returns all the presidents in JSON format.
      *
      * @return a Response of all presidents as JSON
@@ -168,13 +195,7 @@ public class PresidentAPI {
     @Path("plaintext")
     public Response getAllPresidentsPlaintext() {
         List<President> allPresidents = dao.getAll();
-        String responseString = "";
-
-        try {
-            responseString = allPresidents.toString();
-        } catch (Exception e) {
-            logger.error("", e);
-        }
+        String responseString = plaintextFormatHelper(allPresidents);
 
         return Response.status(200).entity(responseString).build();
     }
@@ -198,14 +219,14 @@ public class PresidentAPI {
         return Response.status(200).entity(responseXML).build();
     }
 
-//    @GET
-//    @Path("/id/{id}/plaintext")
-//    @Produces("text/plain")
-//    public Response getPresidentByIDPlaintext(@PathParam("id") int id) {
-//        President president = dao.getById(id);
-//        String response = president.toString();
-//        return Response.status(200).entity(response).build();
-//    }
+    @GET
+    @Path("/id/{id}/plaintext")
+    @Produces("text/plain")
+    public Response getPresidentByIDPlaintext(@PathParam("id") int id) {
+        President president = dao.getById(id);
+        String response = plaintextFormatHelper(president);
+        return Response.status(200).entity(response).build();
+    }
 
     // TODO /presidents/id/:id/:responseType
 //    @GET
