@@ -228,18 +228,45 @@ public class PresidentAPI {
         return Response.status(200).entity(response).build();
     }
 
-    // TODO /presidents/id/:id/:responseType
-//    @GET
-//    @Path("{id}/{responseType}")
-//    @Produces("application/json")
-//    public Response getPresidentByID(int id, String responseType) {
-//
-//    }
-
     // TODO /presidents/party/:party/:responseType
 
+    // /party/:party/
+    @GET
+    @Path("/party/{party}")
+    @Produces("application/json")
+    public Response getPresidentByParty(@PathParam("party") String party) {
+        List<President> listOfPresidents = dao.getByParty(party);
+        String responseJSON = jsonFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
+
+    // /party/:party/xml
+    @GET
+    @Path("/party/{party}")
+    @Produces("application/xml")
+    public Response getPresidentByPartyXML(@PathParam("party") String party) {
+        List<President> listOfPresidents = dao.getByParty(party);
+        String responseJSON = xmlFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
+
+    // /party/:party/plaintext
+    @GET
+    @Path("/party/{party}")
+    @Produces("text/plain")
+    public Response getPresidentByPartyPlaintext(@PathParam("party") String party) {
+        List<President> listOfPresidents = dao.getByParty(party);
+        String responseJSON = plaintextFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
 
     // TODO /presidents/living/:aliveOrDeadBool/:responseType
+
+    // /living/:bool/
+
+    // /living/:bool/xml
+
+    // /living/:bool/plaintext
 
     // TODO PUT /president/id/:id
 
