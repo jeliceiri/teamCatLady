@@ -6,16 +6,16 @@
 - [x] Add Link to Github Classroom Student Folder
 - [x] Write Problem Statement and Obtain Instructors Approval
 - [x] Choose RESTful service to build
-- [ ] List technologies and how they will be utilized
+- [x] List technologies and how they will be utilized
 - [ ] Weekly Time Log
 
 ##  Week 10
-- [ ] Create Project Plan
-- [ ] Build initial database with presidents table
-- [ ] Build President entity and data access object (DAO)
-- [ ] Create test database
-- [ ] Build JUnit5 tests for trip DAO
-- [ ] Add Log4J, JUnit5, and Hibernate
+- [x] Create Project Plan
+- [x] Build initial database with presidents table
+- [x] Build President entity and data access object (DAO)
+- [x] Create test database
+- [x] Build JUnit5 tests for President DAO
+- [x] Add Log4J, JUnit5, and Hibernate
 - [ ] Build main class for the service with specified methods
 - [ ] Decide whether to implement Swagger
 - [ ] Weekly Time Log

@@ -31,8 +31,8 @@ CREATE TABLE `presidents` (
                               `took_office` varchar(10) NOT NULL,
                               `left_office` varchar(10) DEFAULT NULL,
                               `party` varchar(21) NOT NULL,
-                              PRIMARY KEY (`id`)
-                              UNIQUE KEY `number` (`number`)
+                              PRIMARY KEY (`id`),
+                                  CONSTRAINT UC_number UNIQUE (`number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

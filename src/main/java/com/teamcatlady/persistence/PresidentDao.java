@@ -1,6 +1,8 @@
 package com.teamcatlady.persistence;
 
 import com.teamcatlady.entity.President;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,6 +23,7 @@ public class PresidentDao {
      * The Session factory.
      */
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * Gets president by id.
@@ -29,6 +32,7 @@ public class PresidentDao {
      * @return the by id
      */
     public President getById(int id) {
+        logger.debug("Searching for getById {}", id);
         Session session = sessionFactory.openSession();
         President president = session.get(President.class, id);
         session.close();
@@ -145,6 +149,7 @@ public class PresidentDao {
      * @param president the president
      */
     public void saveOrUpdate(President president) {
+        logger.debug("SaveOrUpdating: {}", president);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(president);
@@ -160,6 +165,7 @@ public class PresidentDao {
      */
     public int insert(President president) {
         int id = 0;
+        logger.debug("Inserting: {}", president);
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         id = (int)session.save(president);
@@ -179,5 +185,17 @@ public class PresidentDao {
         session.delete(president);
         transaction.commit();
         session.close();
+    }
+
+    public President getByName(String name) {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<President> query = builder.createQuery(President.class);
+        Root<President> root = query.from(President.class);
+        Expression<String> propertyPath = root.get("name");
+        query.where(builder.equal(propertyPath, name));
+        President president = session.createQuery(query).getSingleResult();
+        session.close();
+        return president;
     }
 }

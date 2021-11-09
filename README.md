@@ -21,8 +21,15 @@ The service supports the following formats:
 * XML
 
 ## The service uses the following technologies:
-* JAX-RS API with Jersey.
-* Swagger for API Documentation
+* Language: Java  
+* Integrated Development Environment (IDE): IntelliJ IDEA  
+* Dependency Management: Maven  
+* RESTful Web Services Framework: JAX-RS API with Jersey    
+* Swagger for API Documentation    
+* Database: MYSQL v 8.0.26  
+* Unit Testing: JUnit 5 with 80%+ code coverage  
+* ORM Framework: Hibernate    
+* Hosting: Amazon Weg Services (AWS)  
 
 ## Resources
 **Presidents**
