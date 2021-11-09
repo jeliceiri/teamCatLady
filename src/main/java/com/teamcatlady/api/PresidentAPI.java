@@ -85,15 +85,67 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-
+    /**
+     * This endpoint returns all the presidents in JSON format.
+     *
+     * @return a Response of all presidents as JSON
+     */
     @GET
     @Produces("application/json")
-    public void getAllPresidents() {
+    public Response getAllPresidents() {
         List<President> allPresidents = dao.getAll();
-        jsonFormatHelper(allPresidents);
+        String responseJSON = "";
+
+        try {
+            responseJSON = objectMapper.writeValueAsString(allPresidents);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return Response.status(200).entity(responseJSON).build();
     }
 
-    // TODO /presidents/:responseType
+    /**
+     * This endpoint returns all the presidents in an XML format.
+     *
+     * @return a Response of all presidents as XML
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("xml")
+    public Response getAllPresidentsXML() {
+        List<President> allPresidents = dao.getAll();
+        String responseXML = "";
+
+        try {
+            responseXML = xmlMapper.writeValueAsString(allPresidents);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return Response.status(200).entity(responseXML).build();
+    }
+
+    /**
+     * This endpoint returns all the presidents in a plaintext format.
+     *
+     * @return a Response of all presidents as plaintext
+     */
+    @GET
+    @Produces("text/plain")
+    @Path("plaintext")
+    public Response getAllPresidentsPlaintext() {
+        List<President> allPresidents = dao.getAll();
+        String responseString = "";
+
+        try {
+            responseString = allPresidents.toString();
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return Response.status(200).entity(responseString).build();
+    }
 
     // TODO /presidents/id/:id/
 //    @GET
