@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.teamcatlady.entity.President;
 import com.teamcatlady.persistence.PresidentDao;
 import org.apache.logging.log4j.LogManager;
@@ -33,6 +34,11 @@ public class PresidentAPI {
      * A utility object, used for mapping POJOs to JSON strings here.
      */
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
+     * A utility object used for mapping POJOs to XML strings.
+     */
+    private XmlMapper xmlMapper = new XmlMapper();
 
     /**
      * Log4J2 instance for all logging.
