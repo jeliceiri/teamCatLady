@@ -46,14 +46,12 @@ public class PresidentAPI {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
-     * Helper method for all API endpoints that return a singular president value as JSON. Handles the
-     * formatting and returns a Response.
+     * Helper method for all API endpoints that return a singular president value as JSON, as a string.
      *
      * @param president a singular president returned from the dao
-     * @return a Response containing the president data formatted as JSON
+     * @return a JSON response as a string
      */
-    public Response jsonFormatHelper(President president) {
-
+    public String jsonFormatHelper(President president) {
         String responseJSON = "";
 
         try {
@@ -62,18 +60,16 @@ public class PresidentAPI {
             logger.error("", e);
         }
 
-        return Response.status(200).entity(responseJSON).build();
+        return responseJSON;
     }
 
     /**
-     * Helper method for all API endpoints that return a List of presidents formatted as JSON. Handles the
-     * formatting and returns a Response.
+     * Helper method for all API endpoints that return a List of presidents formatted as JSON, as a string.
      *
      * @param listOfPresidents a list of presidents returned by the dao
-     * @return a JSON Response
+     * @return a JSON Response as a String
      */
-    public Response jsonFormatHelper(List<President> listOfPresidents) {
-
+    public String jsonFormatHelper(List<President> listOfPresidents) {
         String responseJSON = "";
 
         try {
@@ -82,7 +78,43 @@ public class PresidentAPI {
             logger.error("", e);
         }
 
-        return Response.status(200).entity(responseJSON).build();
+        return responseJSON;
+    }
+
+    /**
+     * Helper method for all API endpoints that return a singular president value as XML, as a string.
+     *
+     * @param president a singular president returned from the dao
+     * @return a XML response as a string
+     */
+    public String xmlFormatHelper(President president) {
+        String responseXML = "";
+
+        try {
+            responseXML = xmlMapper.writeValueAsString(president);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return responseXML;
+    }
+
+    /**
+     * Helper method for all API endpoints that return a List of presidents formatted as XML, as a string.
+     *
+     * @param listOfPresidents a list of presidents returned by the dao
+     * @return a XML Response as a String
+     */
+    public String xmlFormatHelper(List<President> listOfPresidents) {
+        String responseXML = "";
+
+        try {
+            responseXML = xmlMapper.writeValueAsString(listOfPresidents);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return responseXML;
     }
 
     /**
@@ -148,12 +180,31 @@ public class PresidentAPI {
     }
 
     // TODO /presidents/id/:id/
+    @GET
+    @Path("/id/{id}/")
+    @Produces("application/json")
+    public Response getPresidentByID(@PathParam("id") int id) {
+        President president = dao.getById(id);
+        String responseJSON = jsonFormatHelper(president);
+        return Response.status(200).entity(responseJSON).build();
+    }
+
+    @GET
+    @Path("/id/{id}/xml")
+    @Produces("application/xml")
+    public Response getPresidentByIDXML(@PathParam("id") int id) {
+        President president = dao.getById(id);
+        String responseXML = xmlFormatHelper(president);
+        return Response.status(200).entity(responseXML).build();
+    }
+
 //    @GET
-//    @Path("{id}/")
-//    @Produces("application/json")
-//    public Response getPresidentByID(int id) {
+//    @Path("/id/{id}/plaintext")
+//    @Produces("text/plain")
+//    public Response getPresidentByIDPlaintext(@PathParam("id") int id) {
 //        President president = dao.getById(id);
-//        String responseJSON = "";
+//        String response = president.toString();
+//        return Response.status(200).entity(response).build();
 //    }
 
     // TODO /presidents/id/:id/:responseType
