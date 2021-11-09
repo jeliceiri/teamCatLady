@@ -39,19 +39,52 @@ public class PresidentAPI {
      */
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    @GET
-    @Produces("application/json")
-    public Response getAllPresidents() {
-        List<President> allPresidents = dao.getAll();
+    /**
+     * Helper method for all API endpoints that return a singular president value as JSON. Handles the
+     * formatting and returns a Response.
+     *
+     * @param president a singular president returned from the dao
+     * @return a Response containing the president data formatted as JSON
+     */
+    public Response jsonFormatHelper(President president) {
+
         String responseJSON = "";
 
         try {
-            responseJSON = objectMapper.writeValueAsString(allPresidents);
+            responseJSON = objectMapper.writeValueAsString(president);
         } catch (Exception e) {
             logger.error("", e);
         }
 
         return Response.status(200).entity(responseJSON).build();
+    }
+
+    /**
+     * Helper method for all API endpoints that return a List of presidents formatted as JSON. Handles the
+     * formatting and returns a Response.
+     *
+     * @param listOfPresidents a list of presidents returned by the dao
+     * @return a JSON Response
+     */
+    public Response jsonFormatHelper(List<President> listOfPresidents) {
+
+        String responseJSON = "";
+
+        try {
+            responseJSON = objectMapper.writeValueAsString(listOfPresidents);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        return Response.status(200).entity(responseJSON).build();
+    }
+
+
+    @GET
+    @Produces("application/json")
+    public void getAllPresidents() {
+        List<President> allPresidents = dao.getAll();
+        jsonFormatHelper(allPresidents);
     }
 
     // TODO /presidents/:responseType
@@ -61,7 +94,8 @@ public class PresidentAPI {
 //    @Path("{id}/")
 //    @Produces("application/json")
 //    public Response getPresidentByID(int id) {
-//
+//        President president = dao.getById(id);
+//        String responseJSON = "";
 //    }
 
     // TODO /presidents/id/:id/:responseType
