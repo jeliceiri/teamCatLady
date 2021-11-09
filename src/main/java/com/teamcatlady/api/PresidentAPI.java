@@ -263,10 +263,34 @@ public class PresidentAPI {
     // TODO /presidents/living/:aliveOrDeadBool/:responseType
 
     // /living/:bool/
+    @GET
+    @Path("living/{isAlive}")
+    @Produces("application/json")
+    public Response getPresidentByLivingStatus(@PathParam("isAlive") Boolean isAlive) {
+        List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
+        String responseJSON = jsonFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
 
     // /living/:bool/xml
+    @GET
+    @Path("living/{isAlive}/xml")
+    @Produces("application/xml")
+    public Response getPresidentByLivingStatusXML(@PathParam("isAlive") Boolean isAlive) {
+        List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
+        String responseJSON = xmlFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
 
     // /living/:bool/plaintext
+    @GET
+    @Path("living/{isAlive}/plaintext")
+    @Produces("text/plain")
+    public Response getPresidentByLivingStatusPlaintext(@PathParam("isAlive") Boolean isAlive) {
+        List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
+        String responseJSON = plaintextFormatHelper(listOfPresidents);
+        return Response.status(200).entity(responseJSON).build();
+    }
 
     // TODO PUT /president/id/:id
 
