@@ -153,6 +153,7 @@ public class PresidentAPI {
     @GET
     @Produces("application/json")
     public Response getAllPresidents() {
+        logger.info("getAllPresidents JSON endpoint called.");
         List<President> allPresidents = dao.getAll();
         String responseJSON = "";
 
@@ -162,6 +163,7 @@ public class PresidentAPI {
             logger.error("", e);
         }
 
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -174,6 +176,7 @@ public class PresidentAPI {
     @Produces("application/xml")
     @Path("xml")
     public Response getAllPresidentsXML() {
+        logger.info("getAllPresidents XML endpoint called.");
         List<President> allPresidents = dao.getAll();
         String responseXML = "";
 
@@ -183,6 +186,7 @@ public class PresidentAPI {
             logger.error("", e);
         }
 
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseXML).build();
     }
 
@@ -195,9 +199,11 @@ public class PresidentAPI {
     @Produces("text/plain")
     @Path("plaintext")
     public Response getAllPresidentsPlaintext() {
+        logger.info("getAllPresidents plaintext endpoint called.");
         List<President> allPresidents = dao.getAll();
         String responseString = plaintextFormatHelper(allPresidents);
 
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseString).build();
     }
 
@@ -211,8 +217,10 @@ public class PresidentAPI {
     @Path("/id/{id}/")
     @Produces("application/json")
     public Response getPresidentByID(@PathParam("id") int id) {
+        logger.info("getPresidentByID (JSON) searching for ID: " + id);
         President president = dao.getById(id);
         String responseJSON = jsonFormatHelper(president);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -226,8 +234,10 @@ public class PresidentAPI {
     @Path("/id/{id}/xml")
     @Produces("application/xml")
     public Response getPresidentByIDXML(@PathParam("id") int id) {
+        logger.info("getPresidentByID (XML) searching for ID: " + id);
         President president = dao.getById(id);
         String responseXML = xmlFormatHelper(president);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseXML).build();
     }
 
@@ -241,8 +251,10 @@ public class PresidentAPI {
     @Path("/id/{id}/plaintext")
     @Produces("text/plain")
     public Response getPresidentByIDPlaintext(@PathParam("id") int id) {
+        logger.info("getPresidentByID (plaintext) searching for ID: " + id);
         President president = dao.getById(id);
         String response = plaintextFormatHelper(president);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(response).build();
     }
 
@@ -256,8 +268,10 @@ public class PresidentAPI {
     @Path("/party/{party}")
     @Produces("application/json")
     public Response getPresidentByParty(@PathParam("party") String party) {
+        logger.info("getPresidentByParty (JSON) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
         String responseJSON = jsonFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -271,8 +285,10 @@ public class PresidentAPI {
     @Path("/party/{party}")
     @Produces("application/xml")
     public Response getPresidentByPartyXML(@PathParam("party") String party) {
+        logger.info("getPresidentByParty (XML) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
         String responseJSON = xmlFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -286,8 +302,10 @@ public class PresidentAPI {
     @Path("/party/{party}")
     @Produces("text/plain")
     public Response getPresidentByPartyPlaintext(@PathParam("party") String party) {
+        logger.info("getPresidentByParty (plaintext) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
         String responseJSON = plaintextFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -302,8 +320,10 @@ public class PresidentAPI {
     @Path("living/{isAlive}")
     @Produces("application/json")
     public Response getPresidentByLivingStatus(@PathParam("isAlive") Boolean isAlive) {
+        logger.info("getPresidentByLivingStatus (JSON) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
         String responseJSON = jsonFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -318,8 +338,10 @@ public class PresidentAPI {
     @Path("living/{isAlive}/xml")
     @Produces("application/xml")
     public Response getPresidentByLivingStatusXML(@PathParam("isAlive") Boolean isAlive) {
+        logger.info("getPresidentByLivingStatus (XML) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
         String responseJSON = xmlFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -334,8 +356,10 @@ public class PresidentAPI {
     @Path("living/{isAlive}/plaintext")
     @Produces("text/plain")
     public Response getPresidentByLivingStatusPlaintext(@PathParam("isAlive") Boolean isAlive) {
+        logger.info("getPresidentByLivingStatus (plaintext) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
         String responseJSON = plaintextFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
         return Response.status(200).entity(responseJSON).build();
     }
 
@@ -352,8 +376,11 @@ public class PresidentAPI {
     @Path("id/{id}")
     @Consumes("application/json")
     public Response updatePresident(@PathParam("id") int id, President president) {
+        logger.info("Updating the president with ID: " + id);
+        logger.info("Presidential data provided: " + president.toString());
         // TODO ideally this should be reworked with the saveOrUpdate.. maybe :)
         dao.saveOrUpdate(president);
+        logger.info("Returning 200 response now...");
         return Response.status(200).build();
     }
 
@@ -367,10 +394,13 @@ public class PresidentAPI {
     @POST
     @Consumes("application/json")
     public Response addPresident(President president) {
+        logger.info("Adding a new president with the presidential data: " + president.toString());
         int id = dao.insert(president);
         if (id == 0) {
+            logger.info("Returning bad request.");
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
+            logger.info("Successfully added ID: " + id);
             return Response.status(200).entity("Successfully added.").build();
         }
 
