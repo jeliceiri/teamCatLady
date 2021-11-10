@@ -1,11 +1,10 @@
 package com.teamcatlady.api;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -15,7 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This contains all the endpoints underneath /presidents, which is most of our application!
@@ -200,7 +201,11 @@ public class PresidentAPI {
         return Response.status(200).entity(responseString).build();
     }
 
-    // TODO /presidents/id/:id/
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("/id/{id}/")
     @Produces("application/json")
@@ -228,9 +233,7 @@ public class PresidentAPI {
         return Response.status(200).entity(response).build();
     }
 
-    // TODO /presidents/party/:party/:responseType
 
-    // /party/:party/
     @GET
     @Path("/party/{party}")
     @Produces("application/json")
@@ -240,7 +243,7 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // /party/:party/xml
+
     @GET
     @Path("/party/{party}")
     @Produces("application/xml")
@@ -250,7 +253,7 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // /party/:party/plaintext
+
     @GET
     @Path("/party/{party}")
     @Produces("text/plain")
@@ -260,9 +263,7 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // TODO /presidents/living/:aliveOrDeadBool/:responseType
 
-    // /living/:bool/
     @GET
     @Path("living/{isAlive}")
     @Produces("application/json")
@@ -272,7 +273,6 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // /living/:bool/xml
     @GET
     @Path("living/{isAlive}/xml")
     @Produces("application/xml")
@@ -282,7 +282,6 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // /living/:bool/plaintext
     @GET
     @Path("living/{isAlive}/plaintext")
     @Produces("text/plain")
@@ -292,6 +291,15 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-    // TODO PUT /president/id/:id
+    @PUT
+    @Path("id/{id}")
+    @Consumes("application/json")
+    public Response updatePresident(@PathParam("id") int id, President president) {
+        // TODO ideally this should be reworked with the saveOrUpdate.. maybe :)
+        dao.saveOrUpdate(president);
+        return Response.status(200).build();
+    }
+
+    // TODO post?
 
 }
