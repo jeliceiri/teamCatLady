@@ -357,6 +357,23 @@ public class PresidentAPI {
         return Response.status(200).build();
     }
 
-    // TODO post?
+    /**
+     * This endpoint is used for administrative purposes to add a new president.
+     *
+     * @param president a JSON object representing the President, with all instance
+     *                  values except ID provided.
+     * @return a 200 response if the POST was successful, otherwise a bad request status
+     */
+    @POST
+    @Consumes("application/json")
+    public Response addPresident(President president) {
+        int id = dao.insert(president);
+        if (id == 0) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            return Response.status(200).entity("Successfully added.").build();
+        }
+
+    }
 
 }
