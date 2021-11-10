@@ -202,9 +202,10 @@ public class PresidentAPI {
     }
 
     /**
+     * This endpoint returns a singular president by ID formatted as JSON.
      *
-     * @param id
-     * @return
+     * @param id of the president to search for
+     * @return a JSON string representing the president
      */
     @GET
     @Path("/id/{id}/")
@@ -215,6 +216,12 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
+    /**
+     * This endpoint returns a singular president by ID formatted as XML.
+     *
+     * @param id of the president to search for
+     * @return an XML string representing the president
+     */
     @GET
     @Path("/id/{id}/xml")
     @Produces("application/xml")
@@ -224,6 +231,12 @@ public class PresidentAPI {
         return Response.status(200).entity(responseXML).build();
     }
 
+    /**
+     * This endpoint returns a singular president by ID formatted as plaintext.
+     *
+     * @param id of the president to search for
+     * @return a plaintext string representing the president
+     */
     @GET
     @Path("/id/{id}/plaintext")
     @Produces("text/plain")
@@ -233,7 +246,12 @@ public class PresidentAPI {
         return Response.status(200).entity(response).build();
     }
 
-
+    /**
+     * This endpoint returns a list of presidents by party, formatted as JSON.
+     *
+     * @param party A string representing the party to search for
+     * @return A JSON string representing the list of presidents
+     */
     @GET
     @Path("/party/{party}")
     @Produces("application/json")
@@ -243,7 +261,12 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-
+    /**
+     * This endpoint returns a list of presidents by party, formatted as XML.
+     *
+     * @param party A string representing the party to search for
+     * @return An XML string representing the list of presidents
+     */
     @GET
     @Path("/party/{party}")
     @Produces("application/xml")
@@ -253,7 +276,12 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-
+    /**
+     * This endpoint returns a list of presidents by party, as plaintext.
+     *
+     * @param party A string representing the party to search for
+     * @return An plaintext string representing the list of presidents
+     */
     @GET
     @Path("/party/{party}")
     @Produces("text/plain")
@@ -263,7 +291,13 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
-
+    /**
+     * This endpoint returns a list of presidents according to whether they are alive
+     * or not. The endpoint must receive a boolean.
+     *
+     * @param isAlive a boolean indicating whether they want living (true) or dead (false) presidents
+     * @return A JSON string representing the list of presidents
+     */
     @GET
     @Path("living/{isAlive}")
     @Produces("application/json")
@@ -273,6 +307,13 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
+    /**
+     * This endpoint returns a list of presidents according to whether they are alive
+     * or not. The endpoint must receive a boolean.
+     *
+     * @param isAlive a boolean indicating whether they want living (true) or dead (false) presidents
+     * @return An XML string representing the list of presidents
+     */
     @GET
     @Path("living/{isAlive}/xml")
     @Produces("application/xml")
@@ -282,6 +323,13 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
+    /**
+     * This endpoint returns a list of presidents according to whether they are alive
+     * or not. The endpoint must receive a boolean.
+     *
+     * @param isAlive a boolean indicating whether they want living (true) or dead (false) presidents
+     * @return A plaintext string representing the list of presidents
+     */
     @GET
     @Path("living/{isAlive}/plaintext")
     @Produces("text/plain")
@@ -291,6 +339,15 @@ public class PresidentAPI {
         return Response.status(200).entity(responseJSON).build();
     }
 
+    /**
+     * Use this endpoint to update a presidential record.
+     *
+     * @param id The ID of the president being updated
+     * @param president a JSON object shaped as the President class that contains the ID
+     *                  of the president to update, and any values to replace
+     *                  its existing values in the database.
+     * @return A 200 response if was successful
+     */
     @PUT
     @Path("id/{id}")
     @Consumes("application/json")
