@@ -385,7 +385,7 @@ public class PresidentAPI {
         dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", id);
+        jsonObject.put("id", president.getId());
         return Response.status(200).entity(jsonObject.toString()).build();
     }
 
