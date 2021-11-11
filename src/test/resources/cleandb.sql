@@ -1,4 +1,5 @@
 delete from presidents;
+alter table presidents auto_increment = 1;
 INSERT INTO `presidents` VALUES (1, 1,'George Washington',1732,1799,'1789-04-30','1797-03-04','No Party');
 INSERT INTO `presidents` VALUES (2, 2,'John Adams',1735,1826,'1797-03-04','1801-03-04','Federalist');
 INSERT INTO `presidents` VALUES (3, 3,'Thomas Jefferson',1743,1826,'1801-03-04','1809-03-04','Democratic-Republican');

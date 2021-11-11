@@ -21,4 +21,8 @@
 # Devs should copy the example file in main/resources and edit the filepaths
 # to match their system
 src/main/resources/log4j2.properties
+src/test/resources/log4j2.properties
 src/test/resources/hibernate.cfg.xml
+src/main/resources/hibernate.cfg.xml
+
+/logs
