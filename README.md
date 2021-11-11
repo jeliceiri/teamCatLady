@@ -12,7 +12,7 @@ The service provides the following:
 * Get a list of presidents who are living
 * Get a list of presidents who are deceased
 * Add a president
-* Update a president, given a president id
+* Update a president, given a president id 
 
 The service supports the following formats: 
 
@@ -36,7 +36,7 @@ The service supports the following formats:
 
 | Property  | Description   |  Type/Format |
 |---|---|---|
-| id   | unique identifier  | number  |
+| id   | unique identifier that represents the number of the president | number  | 
 | name  | President name, for example: "George Washington"  | string  |
 | birthYear  | President birth year, for example: "1942"  | int  |
 | deathYear  | President death year, for example: "1919"  | int  |
@@ -51,7 +51,8 @@ The service supports the following formats:
 * GET /presidents/id/:id/:responseType
 * GET /presidents/party/:party/:responseType
 * GET /presidents/living/:aliveOrDeadBoolean/:responseType
-* PUT /president/id/:id
+* PUT /presidents/id/:id
+* POST /presidents/
 
 ## Team Docs, Time Log, and Design Docs
 * [Team Resume](docs/TeamResume.md)
