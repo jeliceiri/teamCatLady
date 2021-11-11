@@ -378,6 +378,7 @@ public class PresidentAPI {
     @PUT
     @Path("id/{id}")
     @Consumes("application/json")
+    @Produces("application/json")
     public Response updatePresident(@PathParam("id") int id, President president) {
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
@@ -397,6 +398,7 @@ public class PresidentAPI {
      */
     @POST
     @Consumes("application/json")
+    @Produces("application/json")
     public Response addPresident(President president) {
         logger.info("Adding a new president with the presidential data: " + president.toString());
         int id = dao.insert(president);
@@ -411,5 +413,4 @@ public class PresidentAPI {
         }
 
     }
-
 }
