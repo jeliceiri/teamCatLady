@@ -7,11 +7,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.teamcatlady.entity.President;
 import com.teamcatlady.persistence.PresidentDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -370,7 +373,7 @@ public class PresidentAPI {
      * @param president a JSON object shaped as the President class that contains the ID
      *                  of the president to update, and any values to replace
      *                  its existing values in the database.
-     * @return A 200 response if was successful
+     * @return A 200 response if was successful and the URI of the updated resource
      */
     @PUT
     @Path("id/{id}")
@@ -378,10 +381,11 @@ public class PresidentAPI {
     public Response updatePresident(@PathParam("id") int id, President president) {
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
-        // TODO ideally this should be reworked with the saveOrUpdate.. maybe :)
         dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
-        return Response.status(200).build();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        return Response.status(200).entity(jsonObject.toString()).build();
     }
 
     /**
@@ -389,7 +393,7 @@ public class PresidentAPI {
      *
      * @param president a JSON object representing the President, with all instance
      *                  values except ID provided.
-     * @return a 200 response if the POST was successful, otherwise a bad request status
+     * @return a 201 response and the URI of the new resource if the POST was successful, otherwise a bad request status
      */
     @POST
     @Consumes("application/json")
@@ -401,7 +405,9 @@ public class PresidentAPI {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             logger.info("Successfully added ID: " + id);
-            return Response.status(200).entity("Successfully added.").build();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", id);
+            return Response.status(201).entity(jsonObject.toString()).build();
         }
 
     }
