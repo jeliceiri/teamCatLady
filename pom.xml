@@ -54,7 +54,6 @@
               <goals>
                 <goal>copy-resources</goal>
               </goals>
-
               <configuration>
                 <outputDirectory>${project.build.directory}/${build.finalName}/docs</outputDirectory>
                 <resources>
@@ -63,7 +62,6 @@
                   </resource>
                 </resources>
               </configuration>
-
             </execution>
           </executions>
         </plugin>
@@ -80,11 +78,11 @@
             </execution>
           </executions>
           <configuration>
-            <file>${project.build.directory}/teamCatLady/docs/index.html</file>
+            <file>${project.build.directory}/${build.finalName}/docs/index.html</file>
             <replacements>
               <replacement>
                 <token>https://petstore.swagger.io/v2/swagger.json</token>
-                <value>/presidents/api/swagger.json</value>
+                <value>/todo/api/swagger.json</value>
               </replacement>
             </replacements>
           </configuration>

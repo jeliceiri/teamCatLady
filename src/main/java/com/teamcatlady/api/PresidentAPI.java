@@ -158,9 +158,19 @@ public class PresidentAPI {
     @ApiResponses({
             @ApiResponse(code=200, message="Success")
     })
-    public List<President> getAllPresidents() {
+    public Response getAllPresidents() {
         logger.info("getAllPresidents JSON endpoint called.");
-        return dao.getAll();
+        List<President> allPresidents = dao.getAll();
+        String responseJSON = "";
+
+        try {
+            responseJSON = objectMapper.writeValueAsString(allPresidents);
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        logger.info("Returning 200 response now...");
+        return Response.status(200).entity(responseJSON).build();
     }
 
     /**

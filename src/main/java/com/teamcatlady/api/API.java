@@ -21,7 +21,7 @@ public class API extends Application {
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.0");
         beanConfig.setTitle("Presidents API");
-        beanConfig.setBasePath("/presidents/api");
+        beanConfig.setBasePath("/teamCatLady_war/api");
         //beanConfig.setBasePath("/todo/api");
         beanConfig.setResourcePackage("com.teamcatlady.api");
         beanConfig.setScan(true);
