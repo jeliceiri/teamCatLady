@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.teamcatlady.entity.President;
 import com.teamcatlady.persistence.PresidentDao;
+import io.swagger.annotations.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +25,7 @@ import java.util.Map;
  * @author Team Cat Lady
  */
 @Path("/presidents")
+@Api(tags={"presidents"})
 public class PresidentAPI {
 
     /**
@@ -148,23 +150,17 @@ public class PresidentAPI {
     /**
      * This endpoint returns all the presidents in JSON format.
      *
-     * @return a Response of all presidents as JSON
+     * @return a List of all presidents as JSON
      */
     @GET
     @Produces("application/json")
-    public Response getAllPresidents() {
+    @ApiOperation(value="Fetches all presidents")
+    @ApiResponses({
+            @ApiResponse(code=200, message="Success")
+    })
+    public List<President> getAllPresidents() {
         logger.info("getAllPresidents JSON endpoint called.");
-        List<President> allPresidents = dao.getAll();
-        String responseJSON = "";
-
-        try {
-            responseJSON = objectMapper.writeValueAsString(allPresidents);
-        } catch (Exception e) {
-            logger.error("", e);
-        }
-
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        return dao.getAll();
     }
 
     /**
@@ -375,13 +371,18 @@ public class PresidentAPI {
     @PUT
     @Path("id/{id}")
     @Consumes("application/json")
-    public Response updatePresident(@PathParam("id") int id, President president) {
+    @ApiOperation(value="Updates an existing President")
+    @ApiResponses({
+            @ApiResponse(code=204, message="Success"),
+            @ApiResponse(code=404, message="Not Found")
+    })
+    public void updatePresident(
+            @ApiParam(required = true) @PathParam("id") int id,
+            @ApiParam(required = true) President president) {
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
-        // TODO ideally this should be reworked with the saveOrUpdate.. maybe :)
         dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
-        return Response.status(200).build();
     }
 
     /**
@@ -393,17 +394,17 @@ public class PresidentAPI {
      */
     @POST
     @Consumes("application/json")
-    public Response addPresident(President president) {
+    @ApiOperation(value="Creates a new President")
+    @ApiResponses({
+            @ApiResponse(code=204, message="Success")
+    })
+    public void addPresident(@ApiParam(required=true)President president) {
         logger.info("Adding a new president with the presidential data: " + president.toString());
         int id = dao.insert(president);
         if (id == 0) {
             logger.info("Returning bad request.");
-            return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             logger.info("Successfully added ID: " + id);
-            return Response.status(200).entity("Successfully added.").build();
         }
-
     }
-
 }
