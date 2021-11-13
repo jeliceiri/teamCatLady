@@ -363,7 +363,8 @@ public class PresidentAPI {
     @GET
     @Path("living/{isAlive}")
     @Produces("application/json")
-    @ApiOperation(value="Gets a list of all presidents according to whether they are alive (true) or not (false)")
+    @ApiOperation(value="Gets a list of all presidents according to whether they are alive or not",
+            notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents.")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
     })
@@ -385,7 +386,8 @@ public class PresidentAPI {
     @GET
     @Path("living/{isAlive}/xml")
     @Produces("application/xml")
-    @ApiOperation(value="Gets a list of all presidents according to whether they are alive (true) or not (false), formatted as XML")
+    @ApiOperation(value="Gets a list of all presidents according to whether they are alive or not, formatted as XML",
+            notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents. ")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
     })
@@ -407,7 +409,8 @@ public class PresidentAPI {
     @GET
     @Path("living/{isAlive}/plaintext")
     @Produces("text/plain")
-    @ApiOperation(value="Gets a list of all presidents according to whether they are alive (true) or not (false), formatted as plaintext")
+    @ApiOperation(value="Gets a list of all presidents according to whether they are alive or not, formatted as plaintext",
+            notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents.")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
     })
