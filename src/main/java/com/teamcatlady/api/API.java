@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * Represents the entire Presidents API
- *
+ * Inspiration for this class from: https://github.com/synaptik-labs/javaee-series
  * @author Team Cat Lady
  */
 @ApplicationPath("/api")
