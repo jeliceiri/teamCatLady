@@ -1,5 +1,6 @@
 package com.teamcatlady.entity;
 
+import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Objects;
  */
 @Entity(name = "President")
 @Table(name = "presidents")
+@ApiModel
 public class President {
 
     @Id

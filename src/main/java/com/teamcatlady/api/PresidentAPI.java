@@ -15,6 +15,7 @@ import com.teamcatlady.persistence.PresidentDao;
 import io.swagger.annotations.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -431,33 +432,28 @@ public class PresidentAPI {
      * @param president a JSON object shaped as the President class that contains the ID
      *                  of the president to update, and any values to replace
      *                  its existing values in the database.
-     * @return A 200 response if was successful
+     * @return A 200 response if was successful and the URI of the updated resource
      */
     @PUT
     @Path("id/{id}")
     @Consumes("application/json")
+    @Produces("application/json")
     @ApiOperation(value="Updates an existing President")
-    // Trying to format the model property to look like an object, this is not working
-    /*
-    @ApiModelProperty(
-            value = "A JSON value representing a transaction. An example of the expected schema can be found down here. The fields marked with an * means that they are required.",
-            example = "{foo: whatever, bar: whatever2}")
-
-     */
     @ApiResponses({
-            @ApiResponse(code=204, message="Success"),
+            @ApiResponse(code=200, message="Success"),
             @ApiResponse(code=404, message="Not Found")
     })
-    public void updatePresident(
+    public Response updatePresident(
             @ApiParam(required = true) @PathParam("id") int id,
-            @ApiParam(required = true) String president) throws JsonProcessingException
-
-    {
-        President presidentToUpdate = objectMapper.readValue(president, President.class);
+            @ApiParam(required = true) President president){
+        //President presidentToUpdate = objectMapper.readValue(president, President.class);
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
-        dao.saveOrUpdate(presidentToUpdate);
+        dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", president.getId());
+        return Response.status(200).entity(jsonObject.toString()).build();
     }
 
     /**
@@ -465,21 +461,27 @@ public class PresidentAPI {
      *
      * @param president a JSON object representing the President, with all instance
      *                  values except ID provided.
-     * @return a 200 response if the POST was successful, otherwise a bad request status
+     * @return a 201 response and the URI of the new resource if the POST was successful, otherwise a bad request status
      */
     @POST
     @Consumes("application/json")
+    @Produces("application/json")
     @ApiOperation(value="Creates a new President")
     @ApiResponses({
-            @ApiResponse(code=204, message="Success")
+            @ApiResponse(code=201, message="Successfully Created"),
+            @ApiResponse(code=404, message="Not Found")
     })
-    public void addPresident(@ApiParam(required=true)President president) {
+    public Response addPresident(@ApiParam(required=true)President president) {
         logger.info("Adding a new president with the presidential data: " + president.toString());
         int id = dao.insert(president);
         if (id == 0) {
             logger.info("Returning bad request.");
+            return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             logger.info("Successfully added ID: " + id);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", id);
+            return Response.status(201).entity(jsonObject.toString()).build();
         }
     }
 }
