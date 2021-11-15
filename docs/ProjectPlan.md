@@ -22,7 +22,8 @@
 
 ##  Week 11
 - [x] Deploy to AWS
-- [x] Create Web Services Documentation implemented with Swagger
+- [x] Research Swagger
+- [x] Implement Swagger for Web Services Documentation
 - [ ] Weekly Time Log
 
 ##  Week 12
