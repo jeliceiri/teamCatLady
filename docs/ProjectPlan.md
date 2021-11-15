@@ -16,18 +16,17 @@
 - [x] Create test database
 - [x] Build JUnit5 tests for President DAO
 - [x] Add Log4J, JUnit5, and Hibernate
-- [ ] Build main class for the service with specified methods
-- [ ] Decide whether to implement Swagger
+- [x] Build main class for the service with specified methods
+- [x] Decide whether to implement Swagger
 - [ ] Weekly Time Log
 
 ##  Week 11
-- [ ] Deploy to AWS
-- [ ] Create Web Services Documentation
-- [ ] Create Screen Recordings of project
-- [ ] Implement Swagger
-- [x] Weekly Time Log
+- [x] Deploy to AWS
+- [x] Create Web Services Documentation implemented with Swagger
+- [ ] Weekly Time Log
 
 ##  Week 12
+- [ ] Create Screen Recordings of project
 - [ ] Code Cleanup
 - [ ] Final Touches
 - [ ] Turn in project
