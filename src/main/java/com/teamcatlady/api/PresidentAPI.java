@@ -491,7 +491,7 @@ public class PresidentAPI {
     @ApiOperation(value="Updates an existing President")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not Found")
+            @ApiResponse(code=404, message="Could not update President with that ID"),
     })
     public Response updatePresident(
             @ApiParam(required = true) @PathParam("id") int id,
@@ -499,11 +499,17 @@ public class PresidentAPI {
         //President presidentToUpdate = objectMapper.readValue(president, President.class);
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
+        President presIDToUpdate = dao.getById(id);
+
+        if (presIDToUpdate == null){
+            throw new RestException("Could not update President with that ID", Response.Status.NOT_FOUND);
+        }
         dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", president.getId());
         return Response.status(200).entity(jsonObject.toString()).build();
+
     }
 
     /**
