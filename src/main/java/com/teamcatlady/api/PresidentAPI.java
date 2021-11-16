@@ -405,18 +405,13 @@ public class PresidentAPI {
             notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents.")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="A list of Presidents by that living status was not found")
     })
     public Response getPresidentByLivingStatus(@ApiParam(required=true) @PathParam("isAlive") Boolean isAlive) {
         logger.info("getPresidentByLivingStatus (JSON) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
-        if (isAlive || !isAlive )  {
-            String responseJSON = jsonFormatHelper(listOfPresidents);
-            logger.info("Returning 200 response now...");
-            return Response.status(200).entity(responseJSON).build();
-        } else {
-            throw new RestException("A list of Presidents by that living status was not found", Response.Status.NOT_FOUND);
-        }
+        String responseJSON = jsonFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
+        return Response.status(200).entity(responseJSON).build();
     }
 
     /**
@@ -433,18 +428,13 @@ public class PresidentAPI {
             notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents. ")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="A list of Presidents by that living status was not found")
     })
     public Response getPresidentByLivingStatusXML(@ApiParam(required=true) @PathParam("isAlive") Boolean isAlive) {
         logger.info("getPresidentByLivingStatus (XML) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
-        if (isAlive || !isAlive )  {
-            String responseXML = xmlFormatHelper(listOfPresidents);
-            logger.info("Returning 200 response now...");
-            return Response.status(200).entity(responseXML).build();
-        } else {
-            throw new RestException("A list of Presidents by that living status was not found", Response.Status.NOT_FOUND);
-        }
+        String responseJSON = xmlFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
+        return Response.status(200).entity(responseJSON).build();
     }
 
     /**
@@ -461,18 +451,13 @@ public class PresidentAPI {
             notes = "Accepts a boolean. True will return living presidents, and false will return deceased presidents.")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="A list of Presidents by that living status was not found")
     })
     public Response getPresidentByLivingStatusPlaintext(@ApiParam(required=true) @PathParam("isAlive") Boolean isAlive) {
         logger.info("getPresidentByLivingStatus (plaintext) searching by living status: " + isAlive);
         List<President> listOfPresidents = isAlive ? dao.getAllLivingPresidents() : dao.getAllDeadPresidents();
-        if (isAlive || !isAlive )  {
-            String plainResponse = plaintextFormatHelper(listOfPresidents);
-            logger.info("Returning 200 response now...");
-            return Response.status(200).entity(plainResponse).build();
-        } else {
-            throw new RestException("A list of Presidents by that living status was not found", Response.Status.NOT_FOUND);
-        }
+        String responseJSON = plaintextFormatHelper(listOfPresidents);
+        logger.info("Returning 200 response now...");
+        return Response.status(200).entity(responseJSON).build();
     }
 
     /**
