@@ -345,7 +345,7 @@ public class PresidentAPI {
      * @return An XML string representing the list of presidents
      */
     @GET
-    @Path("/party/{party}")
+    @Path("/party/{party}/xml")
     @Produces("application/xml")
     @ApiOperation(value="Gets all presidents by party, formatted as XML")
     @ApiResponses({
@@ -371,7 +371,7 @@ public class PresidentAPI {
      * @return An plaintext string representing the list of presidents
      */
     @GET
-    @Path("/party/{party}")
+    @Path("/party/{party}/plaintext")
     @Produces("text/plain")
     @ApiOperation(value="Gets all presidents by party, formatted as plaintext")
     @ApiResponses({
