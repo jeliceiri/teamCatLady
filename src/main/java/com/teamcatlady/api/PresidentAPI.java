@@ -324,14 +324,18 @@ public class PresidentAPI {
     @ApiOperation(value="Gets all presidents by party")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByParty(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (JSON) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = jsonFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = jsonFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
     }
 
     /**
@@ -346,14 +350,18 @@ public class PresidentAPI {
     @ApiOperation(value="Gets all presidents by party, formatted as XML")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByPartyXML(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (XML) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = xmlFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = xmlFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
     }
 
     /**
@@ -368,14 +376,19 @@ public class PresidentAPI {
     @ApiOperation(value="Gets all presidents by party, formatted as plaintext")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByPartyPlaintext(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (plaintext) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = plaintextFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = plaintextFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
+
     }
 
     /**
