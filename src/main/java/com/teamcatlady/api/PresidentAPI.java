@@ -329,7 +329,7 @@ public class PresidentAPI {
     public Response getPresidentByParty(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (JSON) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        if (listOfPresidents == null) {
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
             throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
         } else {
             String responseJSON = jsonFormatHelper(listOfPresidents);
@@ -355,7 +355,7 @@ public class PresidentAPI {
     public Response getPresidentByPartyXML(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (XML) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        if (listOfPresidents == null) {
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
             throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
         } else {
             String responseJSON = xmlFormatHelper(listOfPresidents);
@@ -381,7 +381,7 @@ public class PresidentAPI {
     public Response getPresidentByPartyPlaintext(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (plaintext) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        if (listOfPresidents == null) {
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
             throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
         } else {
             String responseJSON = plaintextFormatHelper(listOfPresidents);
