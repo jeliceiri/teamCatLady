@@ -7,7 +7,7 @@
 - [x] Write Problem Statement and Obtain Instructors Approval
 - [x] Choose RESTful service to build
 - [x] List technologies and how they will be utilized
-- [ ] Weekly Time Log
+- [x] Weekly Time Log
 
 ##  Week 10
 - [x] Create Project Plan
@@ -18,13 +18,13 @@
 - [x] Add Log4J, JUnit5, and Hibernate
 - [x] Build main class for the service with specified methods
 - [x] Decide whether to implement Swagger
-- [ ] Weekly Time Log
+- [x] Weekly Time Log
 
 ##  Week 11
 - [x] Deploy to AWS
 - [x] Research Swagger
 - [x] Implement Swagger for Web Services Documentation
-- [ ] Weekly Time Log
+- [x] Weekly Time Log
 
 ##  Week 12
 - [ ] Create Screen Recordings of project
