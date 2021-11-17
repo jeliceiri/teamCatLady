@@ -50,6 +50,7 @@ public class PresidentAPI {
      * Log4J2 instance for all logging.
      */
     private final Logger logger = LogManager.getLogger(this.getClass());
+    String message;
 
     /**
      * Helper method for all API endpoints that return a singular president value as JSON, as a string.
@@ -235,15 +236,22 @@ public class PresidentAPI {
     @ApiOperation(value="Fetches a president by ID number")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A President with the specified ID number was not found")
     })
     @Produces("application/json")
     public Response getPresidentByID(@ApiParam(required=true) @PathParam("id") int id) {
         logger.info("getPresidentByID (JSON) searching for ID: " + id);
         President president = dao.getById(id);
-        String responseJSON = jsonFormatHelper(president);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (president == null) {
+            throw new RestException("A President with the specified ID number was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = jsonFormatHelper(president);
+            logger.info("Returning 200 response now...");
+            return Response
+                    .status(200).
+                    entity(responseJSON).
+                    build();
+        }
     }
 
     /**
@@ -257,15 +265,22 @@ public class PresidentAPI {
     @ApiOperation(value="Fetches a president by ID number, formatted as XML")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A President with the specified ID number was not found")
     })
     @Produces("application/xml")
     public Response getPresidentByIDXML(@ApiParam(required=true) @PathParam("id") int id) {
         logger.info("getPresidentByID (XML) searching for ID: " + id);
         President president = dao.getById(id);
-        String responseXML = xmlFormatHelper(president);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseXML).build();
+        if (president == null) {
+            throw new RestException("A President with the specified ID number was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseXML = xmlFormatHelper(president);
+            logger.info("Returning 200 response now...");
+            return Response
+                    .status(200).
+                    entity(responseXML).
+                    build();
+        }
     }
 
     /**
@@ -285,9 +300,16 @@ public class PresidentAPI {
     public Response getPresidentByIDPlaintext(@ApiParam(required=true) @PathParam("id") int id) {
         logger.info("getPresidentByID (plaintext) searching for ID: " + id);
         President president = dao.getById(id);
-        String response = plaintextFormatHelper(president);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(response).build();
+        if (president == null) {
+            throw new RestException("A President with the specified ID number was not found", Response.Status.NOT_FOUND);
+        } else {
+            String response = plaintextFormatHelper(president);
+            logger.info("Returning 200 response now...");
+            return Response
+                    .status(200).
+                    entity(response).
+                    build();
+        }
     }
 
     /**
@@ -302,14 +324,18 @@ public class PresidentAPI {
     @ApiOperation(value="Gets all presidents by party")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByParty(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (JSON) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = jsonFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = jsonFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
     }
 
     /**
@@ -319,19 +345,23 @@ public class PresidentAPI {
      * @return An XML string representing the list of presidents
      */
     @GET
-    @Path("/party/{party}")
+    @Path("/party/{party}/xml")
     @Produces("application/xml")
     @ApiOperation(value="Gets all presidents by party, formatted as XML")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByPartyXML(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (XML) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = xmlFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = xmlFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
     }
 
     /**
@@ -341,19 +371,24 @@ public class PresidentAPI {
      * @return An plaintext string representing the list of presidents
      */
     @GET
-    @Path("/party/{party}")
+    @Path("/party/{party}/plaintext")
     @Produces("text/plain")
     @ApiOperation(value="Gets all presidents by party, formatted as plaintext")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not found")
+            @ApiResponse(code=404, message="A list of Presidents by that party was not found")
     })
     public Response getPresidentByPartyPlaintext(@ApiParam(required=true) @PathParam("party") String party) {
         logger.info("getPresidentByParty (plaintext) searching by party: " + party);
         List<President> listOfPresidents = dao.getByParty(party);
-        String responseJSON = plaintextFormatHelper(listOfPresidents);
-        logger.info("Returning 200 response now...");
-        return Response.status(200).entity(responseJSON).build();
+        if (listOfPresidents == null || listOfPresidents.isEmpty()) {
+            throw new RestException("A list of Presidents by that party was not found", Response.Status.NOT_FOUND);
+        } else {
+            String responseJSON = plaintextFormatHelper(listOfPresidents);
+            logger.info("Returning 200 response now...");
+            return Response.status(200).entity(responseJSON).build();
+        }
+
     }
 
     /**
@@ -441,7 +476,7 @@ public class PresidentAPI {
     @ApiOperation(value="Updates an existing President")
     @ApiResponses({
             @ApiResponse(code=200, message="Success"),
-            @ApiResponse(code=404, message="Not Found")
+            @ApiResponse(code=404, message="Could not update President with that ID"),
     })
     public Response updatePresident(
             @ApiParam(required = true) @PathParam("id") int id,
@@ -449,11 +484,17 @@ public class PresidentAPI {
         //President presidentToUpdate = objectMapper.readValue(president, President.class);
         logger.info("Updating the president with ID: " + id);
         logger.info("Presidential data provided: " + president.toString());
+        President presIDToUpdate = dao.getById(id);
+
+        if (presIDToUpdate == null){
+            throw new RestException("Could not update President with that ID", Response.Status.NOT_FOUND);
+        }
         dao.saveOrUpdate(president);
         logger.info("Returning 200 response now...");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", president.getId());
         return Response.status(200).entity(jsonObject.toString()).build();
+
     }
 
     /**
