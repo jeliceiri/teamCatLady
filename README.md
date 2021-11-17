@@ -59,5 +59,4 @@ The service supports the following formats:
 * [Team Charter](docs/TeamCharter.md)
 * [Project Plan](docs/ProjectPlan.md)
 * [Time Log](docs/TimeLog.md)
-
-Link to design docs
+* [Presentation Slides](docs/PresidentsAPI-Presentation.pdf)
