@@ -55,6 +55,7 @@ The service supports the following formats:
 * POST /presidents/
 
 ## Team Docs, Time Log, and Design Docs
+* [YouTube video demo] (https://www.youtube.com/watch?v=pMYa6fjF30A)
 * [Team Resume](docs/TeamResume.md)
 * [Team Charter](docs/TeamCharter.md)
 * [Project Plan](docs/ProjectPlan.md)
